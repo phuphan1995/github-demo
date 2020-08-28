@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Home from './module/home/component/home';
+import { Provider } from 'react-redux';
+import configureStore from './redux/store';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-progress-2/main.css';
+import fetchHelper from './helper/FetchHelper';
+import Progress from 'react-progress-2';
 
+export const configure = configureStore();
+fetchHelper.addBeforeRequestInterceptor(() => Progress.show());
+fetchHelper.addAfterResonseInterceptor(() => Progress.hide());
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={configure.store}>
+    <ToastContainer position="top-left" hideProgressBar autoClose={1000} />
+    <Home />
+  </Provider>,
   document.getElementById('root')
 );
 
