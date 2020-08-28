@@ -9,15 +9,14 @@ const mapDispatchToAC = {
   changePagination: (data) => ({ data }),
   getData: (username, paging, isOrgs) => async ({ Api, getState }) => {
     let pagingData = paging || getState().home.paging;
-    let { result, status } = await Api.get(
+    let { result } = await Api.get(
       `${username}/${isOrgs ? organizations_url : repos_url}`,
       {
         page: pagingData.page,
         per_page: pagingData.size,
       }
     );
-    if (SUCCESS_CODE.includes(status))
-      homeDispatcher.getDataSuccess(result, isOrgs);
+    homeDispatcher.getDataSuccess(result || [], isOrgs);
   },
 };
 

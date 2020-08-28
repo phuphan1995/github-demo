@@ -1,4 +1,5 @@
 {
+  "homepage": "http://phuphan1995.github.io/github-demo",
   "name": "github-demo",
   "version": "0.1.0",
   "private": true,
@@ -27,7 +28,9 @@
     "start": "env-cmd -f .env react-scripts start",
     "build": "env-cmd -f .env react-scripts build",
     "test": "react-scripts test --env=jsdom-fourteen",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
